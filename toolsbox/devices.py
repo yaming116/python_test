@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # _*_ coding: utf-8 _*_
+import subprocess
+import os
+import os.path
+import logging
+from toolsbox.platform_tools import get_device_product
 
 __author__ = 'yaming'
 
 ''
 
-import subprocess
-import os
-import os.path
-import logging
-
-from toolsbox.platform_tools import get_device_product
 
 ANDROID_HOME = 'ANDROID_HOME'
 COMMAND_ADB_DEVICES = '%s devices'
@@ -18,6 +17,7 @@ COMMAND_ADB_PRODUCT = '%s -s %s shell getprop ro.product.model'
 
 android_home = None
 adb_path = None
+
 
 def check_env():
     global android_home
@@ -27,6 +27,7 @@ def check_env():
         return True
     return False
 
+
 def build_adb_path():
     global adb_path
     if android_home:
@@ -34,6 +35,7 @@ def build_adb_path():
     else:
         logging.error('android home not found')
         raise ValueError('ANDROID_HOME not found')
+
 
 def get_connect_devices():
     global adb_path
@@ -53,6 +55,7 @@ def get_connect_devices():
 
     logging.info('devices : %s' % devices)
     return devices
+
 
 def build_product_devices():
     devices_list = get_connect_devices()
